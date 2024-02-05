@@ -6,37 +6,92 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
+    <div class="popup" id="popup">
+        <h2>Welcome to Weather App</h2>
+        <p>Quick Guide to use the App: Enter City or Country name in the Search Box, and all the weather information will be displayed on your screen. Please note that, in the case of cities, many times max and min temperature is the same. Don't worry, the app is working fine; try it for a country!</p>
+        <button type="button" onclick="closePopup()">OK</button>
+    </div>
+
     <div class="Box">
+        <div class="title">
+            <h1><font color="#ffffff">Weather App</font></h1> 
+            <h3><font color="#ffffff">Powered by </font>
+                <font color="#ff0000">G</font>
+                <font color="#0059ff">D</font>
+                <font color="#0d7d00">S</font>
+                <font color="#fffb00">C</font>
+            </h3>
+        </div>
         <div class="Search">
             <input type="text" placeholder="Enter Location" spellcheck="false">
-            <button><img src="search.png"></button>
+            <button ><img src="search.png"></button>
         </div>
-        <div class="weather">
+        <div class="weather" id="weather">
             <img src="weather.png" class="weather_icon">
             <h1 class="temp">20°C</h1>
             <h2 class="city_name">Pune</h2>
-       
-
-        <div class="details">
-            <div class="col">
-                <img src="humidity.png">
-                <div>
-                    <p class="humidity">50%</p>
-                    <p>Humidity</p>
+            
+            <div class="detailstemp">
+                <div class="col">
+                    <img src="max.png">
+                    <div>
+                        <p class="TempMax">50%</p>
+                        <p>Max Temp</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="min.png"> 
+                    <div>
+                        <p class="TempMin">15 km</p>
+                        <p>Min Temp</p>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <img src="wind.png"> 
-                <div>
-                    <p class="wind">15 km</p>
-                    <p>Wind Speed</p>
+
+            <div class="details">
+                <div class="col">
+                    <img src="humidity.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="wind.png"> 
+                    <div>
+                        <p class="wind">15 km</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detailsnew">
+                <div class="col">
+                    <img src="pressure.png">
+                    <div>
+                        <p class="pressure">50%</p>
+                        <p>Pressure</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="visibility.png"> 
+                    <div>
+                        <p class="visibility">15 km</p>
+                        <p>Visibility</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
     <script>
+        
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const apikey = "ac98d4791bc9e2b7fef63f36cc4f38c0";
             const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
@@ -54,29 +109,24 @@
                 document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C"; 
                 document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
                 document.querySelector(".wind").innerHTML = Math.round(data.wind.speed) + " km/hr";
+                document.querySelector(".TempMin").innerHTML = data.main.temp_min + " °C";
+                document.querySelector(".TempMax").innerHTML = data.main.temp_max + " °C";
+                document.querySelector(".visibility").innerHTML = data.visibility + " m";
+                document.querySelector(".pressure").innerHTML = data.main.pressure + " hPa";
 
-                    if(data.weather[0].main == "Clouds")
-                    {
-                        icon.src="clouds.png"
-                    }
-                    else if(data.weather[0].main == "Rain")
-                    {
-                        icon.src="rain.png"
-                    }
-                    else if(data.weather[0].main == "Clear")
-                    {
-                        icon.src="clear.png"
-                    }
-                    else if(data.weather[0].main == "Drizzle")
-                    {
-                        icon.src="drizzle.png"
-                    }
-                    else if(data.weather[0].main == "Mist")
-                    {
-                        icon.src="mist.png"
-                    }
+                if(data.weather[0].main == "Clouds") {
+                    icon.src = "clouds.png";
+                } else if(data.weather[0].main == "Rain") {
+                    icon.src = "rain.png";
+                } else if(data.weather[0].main == "Clear") {
+                    icon.src = "clear.png";
+                } else if(data.weather[0].main == "Drizzle") {
+                    icon.src = "drizzle.png";
+                } else if(data.weather[0].main == "Mist") {
+                    icon.src = "mist.png";
+                }
 
-                    document.querySelector(".weather").style.display = "block";
+                document.getElementById("weather").style.display = "block";
             }
 
             searchbutton.addEventListener("click", () => {
@@ -84,7 +134,5 @@
             });
         });
     </script>
-
-    
 </body>
 </html>
