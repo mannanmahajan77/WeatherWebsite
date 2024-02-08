@@ -9,7 +9,7 @@ Further for the Frontend i have used CSS and also embeded Bootstrap. I have made
 
 The website is Responsive as well as I have used the Coloumn layout to Column 12 in each size of screen making it responsive.
 
-There is also a welcome popup modal with instructions on how to use the Website.
+There is also a welcome popup modal with instructions on how to use the Website. Also added a FavIcon for the website.
 
 <img width="952" alt="image" src="https://github.com/mannanmahajan77/WeatherWebsite/assets/158858151/a06eac69-70c6-4ee6-8dcf-0f28f7779f14">
 
